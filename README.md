@@ -6,7 +6,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 1. モック画像
 
-[HomeScreen](./assets/images/HomeScreen.png)
+![HomeScreen](https://github.com/user-attachments/assets/ef8eced1-435c-489b-84f6-73ab10eb5a02)
+
 
 ## Get started
 
