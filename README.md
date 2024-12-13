@@ -2,6 +2,12 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+## タスク
+
+1. モック画像
+
+[HomeScreen](./assets/images/HomeScreen.png)
+
 ## Get started
 
 1. Install dependencies
