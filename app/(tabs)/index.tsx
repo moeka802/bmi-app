@@ -7,6 +7,7 @@ import {
   IBMPlexSans_400Regular,
   IBMPlexSans_700Bold,
 } from "@expo-google-fonts/ibm-plex-sans";
+import { evaluateBMI } from "@/utils/evaluateBMI";
 
 export default function HomeScreen() {
   const SCREEN_WIDTH = Dimensions.get("screen").width;
@@ -113,7 +114,12 @@ export default function HomeScreen() {
               letterSpacing: 5,
             }}
           >
-            普通体重
+            {evaluateBMI({
+              bmi: calculateBMI({
+                height: Number(height),
+                weight: Number(weight),
+              }),
+            })}
           </Text>
           <Text
             style={{
