@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { View, Text, TextInput, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { calculateBMI } from "@/utils/calculateBMI";
@@ -9,6 +10,8 @@ import {
 
 export default function HomeScreen() {
   const SCREEN_WIDTH = Dimensions.get("screen").width;
+  const [height, setHeight] = useState("170");
+  const [weight, setWeight] = useState("60");
 
   let [fontsLoaded] = useFonts({
     KronaOne_400Regular,
@@ -19,6 +22,7 @@ export default function HomeScreen() {
   if (!fontsLoaded) {
     return null;
   }
+
   return (
     <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
       <View style={{ marginTop: 20, gap: 80 }}>
@@ -54,6 +58,9 @@ export default function HomeScreen() {
             <Text style={{ width: 75, fontSize: 12 }}>height</Text>
             <TextInput
               placeholder="height"
+              value={height}
+              onChangeText={setHeight}
+              keyboardType="numeric"
               style={{
                 flex: 1,
                 backgroundColor: "#00000011",
@@ -72,6 +79,9 @@ export default function HomeScreen() {
             <Text style={{ width: 75, fontSize: 12 }}>weight</Text>
             <TextInput
               placeholder="weight"
+              value={weight}
+              onChangeText={setWeight}
+              keyboardType="numeric"
               style={{
                 flex: 1,
                 backgroundColor: "#00000011",
@@ -114,13 +124,14 @@ export default function HomeScreen() {
               marginTop: 5,
             }}
           >
-            （BMI: 24）
+            （BMI:{" "}
+            {calculateBMI({ height: Number(height), weight: Number(weight) })}）
           </Text>
         </View>
         <Text
           style={{
             fontSize: 20,
-            fontFamily: "IBMPlexSans_400Regular",
+            fontFamily: "IBMPlexSans_40500Regular",
             width: "100%",
             textAlign: "right",
           }}

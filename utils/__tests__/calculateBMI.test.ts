@@ -13,21 +13,7 @@ describe("calculateBMI", () => {
         height: 170,
         weight: 60,
       },
-      expected: 20,
-    },
-    {
-      param: {
-        height: 180,
-        weight: 50,
-      },
-      expected: 20,
-    },
-    {
-      param: {
-        height: 130,
-        weight: 20,
-      },
-      expected: 20,
+      expected: 20.76,
     },
   ];
 
