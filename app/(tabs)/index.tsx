@@ -77,25 +77,9 @@ export default function HomeScreen() {
       </View>
 
       <View style={{ gap: 25, marginTop: 60 }}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontFamily: "IBMPlexSans_400Regular",
-            width: "100%",
-          }}
-        >
-          あなたは...
-        </Text>
+        <Text style={styles.text}>あなたは...</Text>
         <View>
-          <Text
-            style={{
-              fontSize: 60,
-              fontFamily: "IBMPlexSans_700Bold",
-              fontWeight: "bold",
-              textAlign: "center",
-              letterSpacing: 5,
-            }}
-          >
+          <Text style={[styles.boldBigText, { textAlign: "center" }]}>
             {evaluateBMI({
               bmi: calculateBMI({
                 height: Number(height),
@@ -104,32 +88,26 @@ export default function HomeScreen() {
             })}
           </Text>
           <Text
-            style={{
-              fontSize: 20,
-              fontFamily: "IBMPlexSans_700Bold",
-              fontWeight: "bold",
-              textAlign: "center",
-              marginTop: 5,
-            }}
+            style={[styles.boldText, { textAlign: "center", marginTop: 5 }]}
           >
             （BMI:{" "}
             {calculateBMI({ height: Number(height), weight: Number(weight) })}）
           </Text>
         </View>
         <Text
-          style={{
-            fontSize: 20,
-            fontFamily: "IBMPlexSans_40500Regular",
-            width: "100%",
-            textAlign: "right",
-          }}
+          style={[
+            styles.text,
+            {
+              textAlign: "right",
+            },
+          ]}
         >
           です。
         </Text>
       </View>
 
       <View style={{ marginTop: 40 }}>
-        <Text style={{ fontSize: 16, textAlign: "right" }}>
+        <Text style={[styles.subText, { textAlign: "right" }]}>
           あとkg減らすと、適正体重{"\n"}
           {calculateIdealWeight({ height: Number(height) })}kgになります。
         </Text>
@@ -148,5 +126,21 @@ const styles = StyleSheet.create({
     fontFamily: "KronaOne_400Regular",
     fontSize: 20,
     letterSpacing: 5,
+  },
+  text: {
+    fontFamily: "KronaOne_400Regular",
+    fontSize: 20,
+  },
+  subText: {
+    fontSize: 16,
+  },
+  boldBigText: {
+    fontFamily: "IBMPlexSans_700Bold",
+    fontSize: 60,
+    letterSpacing: 5,
+  },
+  boldText: {
+    fontFamily: "IBMPlexSans_700Bold",
+    fontSize: 20,
   },
 });
