@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, Dimensions } from "react-native";
+import { View, Text, TextInput, Dimensions, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { calculateBMI } from "@/utils/calculateBMI";
 import { useFonts, KronaOne_400Regular } from "@expo-google-fonts/krona-one";
@@ -29,24 +29,8 @@ export default function HomeScreen() {
     <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
       <View style={{ marginTop: 20, gap: 80 }}>
         <View>
-          <Text
-            style={{
-              fontFamily: "KronaOne_400Regular",
-              fontSize: 45,
-              letterSpacing: 5,
-            }}
-          >
-            BMI
-          </Text>
-          <Text
-            style={{
-              fontFamily: "KronaOne_400Regular",
-              fontSize: 20,
-              letterSpacing: 5,
-            }}
-          >
-            Body Mass Index
-          </Text>
+          <Text style={styles.heading}>BMI</Text>
+          <Text style={styles.subheading}>Body Mass Index</Text>
         </View>
 
         <View style={{ gap: 30 }}>
@@ -149,10 +133,23 @@ export default function HomeScreen() {
 
       <View style={{ marginTop: 40, width: SCREEN_WIDTH - 40 }}>
         <Text style={{ fontSize: 16, textAlign: "right" }}>
-          あとxxxkg減らすと、適正体重{"\n"}
+          あとkg減らすと、適正体重{"\n"}
           {calculateIdealWeight({ height: Number(height) })}kgになります。
         </Text>
       </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  heading: {
+    fontFamily: "KronaOne_400Regular",
+    fontSize: 45,
+    letterSpacing: 5,
+  },
+  subheading: {
+    fontFamily: "KronaOne_400Regular",
+    fontSize: 20,
+    letterSpacing: 5,
+  },
+});
