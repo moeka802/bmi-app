@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, Dimensions, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { calculateBMI } from "@/utils/calculateBMI";
 import { useFonts, KronaOne_400Regular } from "@expo-google-fonts/krona-one";
@@ -11,7 +11,6 @@ import { evaluateBMI } from "@/utils/evaluateBMI";
 import { calculateIdealWeight } from "@/utils/calculateIdealWeight";
 
 export default function HomeScreen() {
-  const SCREEN_WIDTH = Dimensions.get("screen").width;
   const [height, setHeight] = useState("170");
   const [weight, setWeight] = useState("60");
 
@@ -26,8 +25,8 @@ export default function HomeScreen() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
-      <View style={{ marginTop: 20, gap: 80 }}>
+    <SafeAreaView style={{ flex: 1, padding: 20 }}>
+      <View style={{ gap: 80 }}>
         <View>
           <Text style={styles.heading}>BMI</Text>
           <Text style={styles.subheading}>Body Mass Index</Text>
@@ -38,7 +37,6 @@ export default function HomeScreen() {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              width: SCREEN_WIDTH - 40,
             }}
           >
             <Text style={{ width: 75, fontSize: 12 }}>height</Text>
@@ -59,7 +57,6 @@ export default function HomeScreen() {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              width: SCREEN_WIDTH - 40,
             }}
           >
             <Text style={{ width: 75, fontSize: 12 }}>weight</Text>
@@ -79,7 +76,7 @@ export default function HomeScreen() {
         </View>
       </View>
 
-      <View style={{ width: SCREEN_WIDTH - 40, gap: 25, marginTop: 60 }}>
+      <View style={{ gap: 25, marginTop: 60 }}>
         <Text
           style={{
             fontSize: 20,
@@ -131,7 +128,7 @@ export default function HomeScreen() {
         </Text>
       </View>
 
-      <View style={{ marginTop: 40, width: SCREEN_WIDTH - 40 }}>
+      <View style={{ marginTop: 40 }}>
         <Text style={{ fontSize: 16, textAlign: "right" }}>
           あとkg減らすと、適正体重{"\n"}
           {calculateIdealWeight({ height: Number(height) })}kgになります。
