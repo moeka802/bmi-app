@@ -8,6 +8,7 @@ import {
   IBMPlexSans_700Bold,
 } from "@expo-google-fonts/ibm-plex-sans";
 import { evaluateBMI } from "@/utils/evaluateBMI";
+import { calculateIdealWeight } from "@/utils/calculateIdealWeight";
 
 export default function HomeScreen() {
   const SCREEN_WIDTH = Dimensions.get("screen").width;
@@ -148,7 +149,8 @@ export default function HomeScreen() {
 
       <View style={{ marginTop: 40, width: SCREEN_WIDTH - 40 }}>
         <Text style={{ fontSize: 16, textAlign: "right" }}>
-          あと2.7kg減らすと、適正体重{"\n"}63.3kgになります。
+          あとxxxkg減らすと、適正体重{"\n"}
+          {calculateIdealWeight({ height: Number(height) })}kgになります。
         </Text>
       </View>
     </SafeAreaView>
