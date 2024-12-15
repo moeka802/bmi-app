@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Keyboard } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { calculateBMI } from "@/utils/calculateBMI";
 import { useFonts, KronaOne_400Regular } from "@expo-google-fonts/krona-one";
@@ -24,6 +24,14 @@ export default function HomeScreen() {
     return null;
   }
 
+  const handleInputValue = (v: string, change: Function) => {
+    // 正規表現で数字と小数点のみを許可
+    const numericValue = v.replace(/[^0-9.]/g, "");
+    // 小数点２位以下を消す
+    const formattedValue = numericValue.match(/^\d*(\.\d{0,1})?/);
+    change(formattedValue ? formattedValue[0] : "");
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, padding: 20 }}>
       <View style={{ gap: 80 }}>
@@ -43,7 +51,7 @@ export default function HomeScreen() {
             <TextInput
               placeholder="height"
               value={height}
-              onChangeText={setHeight}
+              onChangeText={(v) => handleInputValue(v, setHeight)}
               keyboardType="numeric"
               style={{
                 flex: 1,
@@ -63,7 +71,7 @@ export default function HomeScreen() {
             <TextInput
               placeholder="weight"
               value={weight}
-              onChangeText={setWeight}
+              onChangeText={(v) => handleInputValue(v, setWeight)}
               keyboardType="numeric"
               style={{
                 flex: 1,
