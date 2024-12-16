@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { View, Text, TextInput, StyleSheet, Keyboard } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { calculateBMI } from "@/utils/calculateBMI";
@@ -13,6 +13,26 @@ import { calculateIdealWeight } from "@/utils/calculateIdealWeight";
 export default function HomeScreen() {
   const [height, setHeight] = useState("170");
   const [weight, setWeight] = useState("60");
+
+  const bmiMessage = useMemo(() => {
+    // 適正体重
+    const idealWeight = calculateIdealWeight({ height: Number(height) });
+    const weight_n = Number(weight);
+    if (weight_n === idealWeight) {
+      return "適正体重です";
+    } else if (weight_n > idealWeight) {
+      // 現在の体重が重いとき
+      return `あと${
+        weight_n - idealWeight
+      }kg減ると、適正体重の${idealWeight}kgです`;
+    } else if (weight_n < idealWeight) {
+      return `あと${
+        idealWeight - weight_n
+      }kg増えると、適正体重の${idealWeight}kgです`;
+    } else {
+      return "";
+    }
+  }, [height, weight]);
 
   let [fontsLoaded] = useFonts({
     KronaOne_400Regular,
@@ -115,10 +135,11 @@ export default function HomeScreen() {
       </View>
 
       <View style={{ marginTop: 40 }}>
-        <Text style={[styles.subText, { textAlign: "right" }]}>
+        <Text>{bmiMessage}</Text>
+        {/* <Text style={[styles.subText, { textAlign: "right" }]}>
           あとkg減らすと、適正体重{"\n"}
           {calculateIdealWeight({ height: Number(height) })}kgになります。
-        </Text>
+        </Text> */}
       </View>
     </SafeAreaView>
   );
