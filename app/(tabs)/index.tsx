@@ -9,6 +9,7 @@ import {
 } from "@expo-google-fonts/ibm-plex-sans";
 import { evaluateBMI } from "@/utils/evaluateBMI";
 import { calculateIdealWeight } from "@/utils/calculateIdealWeight";
+import BigNumber from "bignumber.js";
 
 export default function HomeScreen() {
   const [height, setHeight] = useState("170");
@@ -16,19 +17,21 @@ export default function HomeScreen() {
 
   const bmiMessage = useMemo(() => {
     // 適正体重
-    const idealWeight = calculateIdealWeight({ height: Number(height) });
-    const weight_n = Number(weight);
+    const idealWeight = new BigNumber(
+      calculateIdealWeight({ height: Number(height) })
+    );
+    const weight_n = new BigNumber(Number(weight));
     if (weight_n === idealWeight) {
       return "適正体重です";
     } else if (weight_n > idealWeight) {
       // 現在の体重が重いとき
-      return `あと${
-        weight_n - idealWeight
-      }kg減ると、適正体重の${idealWeight}kgです`;
+      return `あと${weight_n.minus(
+        idealWeight
+      )}kg減ると、適正体重の${idealWeight}kgです`;
     } else if (weight_n < idealWeight) {
-      return `あと${
-        idealWeight - weight_n
-      }kg増えると、適正体重の${idealWeight}kgです`;
+      return `あと${idealWeight.minus(
+        weight_n
+      )}kg増えると、適正体重の${idealWeight}kgです`;
     } else {
       return "";
     }
