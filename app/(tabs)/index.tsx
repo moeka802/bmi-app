@@ -15,23 +15,23 @@ export default function HomeScreen() {
   const [height, setHeight] = useState("170");
   const [weight, setWeight] = useState("60");
 
-  const bmiMessage = useMemo(() => {
+  const idealWeightMessage = useMemo(() => {
     // 適正体重
     const idealWeight = new BigNumber(
       calculateIdealWeight({ height: Number(height) })
     );
     const weight_n = new BigNumber(Number(weight));
     if (weight_n === idealWeight) {
-      return "適正体重です";
+      return "適正体重です。";
     } else if (weight_n > idealWeight) {
       // 現在の体重が重いとき
       return `あと${weight_n.minus(
         idealWeight
-      )}kg減ると、適正体重の${idealWeight}kgです`;
+      )}kg減らすと、\n適正体重の${idealWeight}kgになります。`;
     } else if (weight_n < idealWeight) {
       return `あと${idealWeight.minus(
         weight_n
-      )}kg増えると、適正体重の${idealWeight}kgです`;
+      )}kg増やすと、\n適正体重の${idealWeight}kgになります。`;
     } else {
       return "";
     }
@@ -138,11 +138,9 @@ export default function HomeScreen() {
       </View>
 
       <View style={{ marginTop: 40 }}>
-        <Text>{bmiMessage}</Text>
-        {/* <Text style={[styles.subText, { textAlign: "right" }]}>
-          あとkg減らすと、適正体重{"\n"}
-          {calculateIdealWeight({ height: Number(height) })}kgになります。
-        </Text> */}
+        <Text style={[styles.subText, { textAlign: "right" }]}>
+          {idealWeightMessage}
+        </Text>
       </View>
     </SafeAreaView>
   );
