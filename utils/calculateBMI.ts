@@ -10,6 +10,9 @@ export const calculateBMI = (props: {
 }) => {
   // BMIの計算処理
   const { height, weight } = props;
+  if (height === 0) {
+    return 0;
+  }
   const height_m = height / 100;
   const bmi = weight / (height_m * height_m);
   return Math.round(bmi * 100) / 100;
